@@ -2,8 +2,6 @@ import { StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import CustomKeyboardAvoidingView from '../ui/CustomKeyboardAvoidingView'
 import LayoutAuth from '../ui/LayoutAuth'
-import TitleHeaderAuth from './TitleHeaderAuth'
-import FormInput from './FormInput'
 import FormNavigator from '../ui/FormNavigator'
 import FormButton from '../ui/FormButton'
 import { signUpSchema, validate } from '../utils/validator'
@@ -11,6 +9,8 @@ import client from '../api/client'
 import { runAxiosAsync } from '../api/runAxiosAsync'
 import { showMessage } from 'react-native-flash-message'
 import { useNavigation } from '@react-navigation/native'
+import TitleHeaderAuth from '../ui/TitleHeaderAuth'
+import FormInput from '../ui/FormInput'
 
 const SignUp = () => {
   const [userInfo, setUserInfo] = useState({

@@ -8,9 +8,9 @@ import { useNavigation } from '@react-navigation/native'
 import { runAxiosAsync } from '../api/runAxiosAsync'
 import client from '../api/client'
 import { showMessage } from 'react-native-flash-message'
-import TitleHeaderAuth from './TitleHeaderAuth'
-import FormInput from './FormInput'
 import FormNavigator from '../ui/FormNavigator'
+import TitleHeaderAuth from '../ui/TitleHeaderAuth'
+import FormInput from '../ui/FormInput'
 
 const ForgetPassword = () => {
   const { navigate } = useNavigation()
