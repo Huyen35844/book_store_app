@@ -10,6 +10,7 @@ import client from '../api/client'
 import asyncStorage, { Keys } from '../utils/asycnStorage'
 import { runAxiosAsync } from '../api/runAxiosAsync'
 import { updateAuthState } from '../store/auth'
+import { showMessage } from 'react-native-flash-message'
 
 const Navigator = () => {
     const MyTheme = {

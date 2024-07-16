@@ -2,13 +2,13 @@ import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import CustomKeyboardAvoidingView from '../ui/CustomKeyboardAvoidingView'
 import LayoutAuth from '../ui/LayoutAuth'
-import TitleHeaderAuth from './TitleHeaderAuth'
-import FormInput from './FormInput'
 import FormButton from '../ui/FormButton'
 import FormNavigator from '../ui/FormNavigator'
 import useAuth from '../hooks/useAuth'
 import { showMessage } from 'react-native-flash-message'
 import { useNavigation } from '@react-navigation/native'
+import TitleHeaderAuth from '../ui/TitleHeaderAuth'
+import FormInput from '../ui/FormInput'
 
 const SignIn = () => {
   const [userInfo, setUserInfo] = useState({ email: "", password: "" })
