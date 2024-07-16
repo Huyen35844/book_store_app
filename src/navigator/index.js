@@ -1,10 +1,15 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native'
 import AuthNavigator from './AuthNavigator'
 import AppNavigator from './AppNavigator'
 import useAuth from '../hooks/useAuth'
 import LoadingSpinner from '../ui/LoadingSpinner'
+import { useDispatch } from 'react-redux'
+import client from '../api/client'
+import asyncStorage, { Keys } from '../utils/asycnStorage'
+import { runAxiosAsync } from '../api/runAxiosAsync'
+import { updateAuthState } from '../store/auth'
 
 const Navigator = () => {
     const MyTheme = {
@@ -15,7 +20,34 @@ const Navigator = () => {
         }
     }
 
+    const dispatch = useDispatch()
     const { loggedIn, authState } = useAuth()
+
+    //Why don't we store loggedIn in asyncStorage because it causes the delay and show signIn screen
+    const fetchAuthState = async () => {
+        const token = await asyncStorage.get(Keys.ACCESS_TOKEN)
+        // const token = await AsyncStorage.getItem("access-token")
+        if (token) {
+            dispatch(updateAuthState({ profile: null, pending: true }))
+            const res = await runAxiosAsync(
+                client.get("/auth/profile", {
+                    headers: {
+                        Authorization: "Bearer " + token
+                    }
+                })
+            )
+            if (res.status) {
+                dispatch(updateAuthState({ profile: { ...res.data, accessToken: token }, pending: false }))
+            } else {
+                showMessage({ message: res.data, type: 'danger' })
+                dispatch(updateAuthState({ profile: null, pending: false }))
+            }
+        }
+    }
+
+    useEffect(() => {
+        fetchAuthState()
+    }, [])
 
     return (
         <NavigationContainer theme={MyTheme}>
