@@ -5,13 +5,18 @@ import {
 } from 'react-native';
 import Navigator from './src/navigator';
 import FlashMessage from 'react-native-flash-message';
+import store from './src/store';
+import { Provider } from 'react-redux';
 
 function App(): React.JSX.Element {
   return (
-    <SafeAreaView style={styles.container}>
-      <Navigator />
-      <FlashMessage position="top" />
-    </SafeAreaView>
+    <Provider store={store}>
+      <SafeAreaView style={styles.container}>
+        <Navigator />
+        <FlashMessage position="top" />
+      </SafeAreaView>
+    </Provider>
+
   );
 }
 export default App;
