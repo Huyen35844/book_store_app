@@ -3,6 +3,8 @@ import React from 'react'
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native'
 import AuthNavigator from './AuthNavigator'
 import AppNavigator from './AppNavigator'
+import useAuth from '../hooks/useAuth'
+import LoadingSpinner from '../ui/LoadingSpinner'
 
 const Navigator = () => {
     const MyTheme = {
@@ -13,14 +15,14 @@ const Navigator = () => {
         }
     }
 
+    const { loggedIn, authState } = useAuth()
+
     return (
         <NavigationContainer theme={MyTheme}>
-            <AuthNavigator />
-            {/* <AppNavigator /> */}
+            <LoadingSpinner visiable={authState.pending} />
+            {!loggedIn ? <AuthNavigator /> : <AppNavigator />}
         </NavigationContainer>
     )
 }
 
 export default Navigator
-
-const styles = StyleSheet.create({})
