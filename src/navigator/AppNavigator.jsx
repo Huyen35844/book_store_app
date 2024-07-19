@@ -3,6 +3,7 @@ import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Home from '../views/Home'
 import TabNavigator from './TabNavigator'
+import EditProfile from '../views/EditProfile'
 
 const AppNavigator = () => {
   const Stack = createNativeStackNavigator()
@@ -10,6 +11,8 @@ const AppNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name='TabNavigator' component={TabNavigator} />
+      <Stack.Screen name='EditProfile' component={EditProfile} />
+      
     </Stack.Navigator>
   )
 }

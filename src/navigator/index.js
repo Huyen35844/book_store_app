@@ -11,6 +11,7 @@ import asyncStorage, { Keys } from '../utils/asycnStorage'
 import { runAxiosAsync } from '../api/runAxiosAsync'
 import { updateAuthState } from '../store/auth'
 import { showMessage } from 'react-native-flash-message'
+import useClient from '../hooks/useClient'
 
 const Navigator = () => {
     const MyTheme = {
@@ -23,6 +24,7 @@ const Navigator = () => {
 
     const dispatch = useDispatch()
     const { loggedIn, authState } = useAuth()
+    const { authClient } = useClient()
 
     //Why don't we store loggedIn in asyncStorage because it causes the delay and show signIn screen
     const fetchAuthState = async () => {
@@ -31,7 +33,7 @@ const Navigator = () => {
         if (token) {
             dispatch(updateAuthState({ profile: null, pending: true }))
             const res = await runAxiosAsync(
-                client.get("/auth/profile", {
+                authClient.get("/auth/profile", {
                     headers: {
                         Authorization: "Bearer " + token
                     }
@@ -40,6 +42,7 @@ const Navigator = () => {
             if (res.status) {
                 dispatch(updateAuthState({ profile: { ...res.data, accessToken: token }, pending: false }))
             } else {
+                console.log(res.data);
                 showMessage({ message: res.data, type: 'danger' })
                 dispatch(updateAuthState({ profile: null, pending: false }))
             }
