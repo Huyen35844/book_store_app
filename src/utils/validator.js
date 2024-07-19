@@ -18,8 +18,11 @@ export const validate = async (schema, value) => {
 }
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
 const passwordRegex =
     /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#\$%\^&\*])[a-zA-Z\d!@#\$%\^&\*]+$/;
+
+const phoneNumberRegex = /^(?:\+84|0)(?:\d{9}|\d{8})$/;
 
 yup.addMethod(yup.string, "email", function validateEmail(message) {
     return this.matches(emailRegex, {
@@ -30,6 +33,7 @@ yup.addMethod(yup.string, "email", function validateEmail(message) {
 })
 
 const email = { email: yup.string().email("Invalid email!").required("Email is missing!") }
+
 const password = {
     password: yup
         .string()
@@ -37,15 +41,33 @@ const password = {
         .min(8, "Password should be at least 8 chars long!")
         .matches(passwordRegex, "Password is too simple!"),
 }
+
 const name = { name: yup.string().required("Name is missing!") }
+
 //The .oneOf() method is used to specify a list of allowed values, and Yup.ref() is used to reference another field in the schema.
 const confirmPassword = { confirmPassword: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match!').required("Confirm Password is missing!") }
+
+const address = {
+    address: yup
+        .string()
+        .required("Address is missing!")
+}
+
+const phoneNumber = {
+    phoneNumber: yup.string().required("Phone number is missing!").matches(phoneNumberRegex, "Phone number is invalid!")
+}
 
 export const signUpSchema = yup.object({
     ...name,
     ...email,
     ...password,
     ...confirmPassword
+})
+
+export const updateProfileSchema = yup.object({
+    ...name,
+    ...address,
+    ...phoneNumber
 })
 
 
