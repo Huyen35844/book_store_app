@@ -6,6 +6,7 @@ import HomeTitle from '../ui/HomeTitle'
 import ProductList from '../component/ProductList'
 import { runAxiosAsync } from '../api/runAxiosAsync'
 import client from '../api/client'
+import { useNavigation } from '@react-navigation/native'
 
 const Home = () => {
   const images = [
@@ -15,6 +16,7 @@ const Home = () => {
   ]
 
   const [products, setProducts] = useState([])
+  const { navigate } = useNavigation()
 
   const fetchProductList = async () => {
     const res = await runAxiosAsync(
@@ -33,7 +35,7 @@ const Home = () => {
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
         <SliderImage data={images} />
         <HomeTitle title={"Latest books"} />
-        <ProductList data={products} />
+        <ProductList data={products}/>
       </ScrollView>
     </>
   )

@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
         backgroundColor: color.primary
     },
     input: {
+        fontSize: 18,
         margin: 15,
         backgroundColor: "white",
         borderRadius: 10,

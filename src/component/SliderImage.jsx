@@ -1,6 +1,7 @@
 import { Dimensions, FlatList, Image, StyleSheet, View } from 'react-native'
 import React, { useState } from 'react'
 import size from '../utils/size'
+import color from '../utils/color'
 
 const { width } = Dimensions.get('screen')
 const imageWidth = width
@@ -32,12 +33,12 @@ const SliderImage = ({ data }) => {
                 viewabilityConfig={viewabilityConfig}
             />
             <View style={styles.dotContainer}>
-                {data.map((_, index) => (
+                {data?.map((_, index) => (
                     <View
                         key={index}
                         style={[
                             styles.dot,
-                            { backgroundColor: currentIndex === index ? 'green' : 'white' }
+                            { backgroundColor: currentIndex === index ? color.primary : 'white' }
                         ]}
                     />
                 ))}

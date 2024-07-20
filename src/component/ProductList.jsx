@@ -1,18 +1,20 @@
-import { Dimensions, FlatList, Image, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, FlatList, Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import size from '../utils/size';
 import color from '../utils/color';
+import { useNavigation } from '@react-navigation/native';
 
 const { width } = Dimensions.get('screen');
 const aspect = 12 / 5;
 
 const ProductList = ({ data }) => {
+    const { navigate } = useNavigation()
     const renderItem = ({ item }) => (
-        <View style={styles.itemContainer}>
+        <Pressable onPress={() => navigate("Detail", { id: item.id })} style={styles.itemContainer}>
             <Image style={styles.image} source={{ uri: item.images[0] }} />
             <Text style={styles.name} numberOfLines={1}>{item.name}</Text>
             <Text style={styles.price}>$ {item.price}</Text>
-        </View>
+        </Pressable >
     );
 
     return (
