@@ -16,7 +16,7 @@ import { useDispatch } from 'react-redux'
 
 const Profile = () => {
   const { navigate } = useNavigation()
-  const { authState } = useAuth()
+  const { authState, signOut } = useAuth()
   const { authClient } = useClient()
   const dispatch = useDispatch()
   const [busy, setBusy] = useState(false)
@@ -75,7 +75,7 @@ const Profile = () => {
       <ItemProfile name={"Terms and Conditions"} />
       <ItemProfile name={"Privacy Policy"} />
       <ItemProfile name={"Transaction History"} />
-      <ItemProfile name={"Log Out"} />
+      <ItemProfile name={"Log Out"} onPress={() => signOut()} />
     </ScrollView>
   )
 }

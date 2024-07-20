@@ -20,7 +20,6 @@ const useClient = () => {
     authClient.interceptors.request.use((config) => {
         if (!config.headers.Authorization) {
             config.headers.Authorization = "Bearer " + token
-            console.log(config.headers.Authorization);
         }
         return config
     }, (error) => {
@@ -41,9 +40,9 @@ const useClient = () => {
             failedRequest.response.config.headers.Authorization = "Bearer " + res.data.tokens.accessToken
 
             //to handle sign out if the token expired, updated the latest refresh token
-            // if (failedRequest.response.config.url === '/auth/sign-out') {
-            //     failedRequest.response.config.data = { refreshToken: res.data.tokens.refresh }
-            // }
+            if (failedRequest.response.config.url === '/auth/sign-out') {
+                failedRequest.response.config.data = { refreshToken: res.data.tokens.refreshToken }
+            }
 
             await asyncStorage.save(Keys.ACCESS_TOKEN, res.data.tokens.accessToken)
             await asyncStorage.save(Keys.REFRESH_TOKEN, res.data.tokens.refreshToken)
