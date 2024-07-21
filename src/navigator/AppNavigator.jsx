@@ -5,6 +5,8 @@ import Home from '../views/Home'
 import TabNavigator from './TabNavigator'
 import EditProfile from '../views/EditProfile'
 import Detail from '../views/Detail'
+import Payment from '../views/Payment'
+import Cart from '../views/Cart'
 
 const AppNavigator = () => {
   const Stack = createNativeStackNavigator()
@@ -14,7 +16,8 @@ const AppNavigator = () => {
       <Stack.Screen name='TabNavigator' component={TabNavigator} />
       <Stack.Screen name='EditProfile' component={EditProfile} />
       <Stack.Screen name='Detail' component={Detail} />
-      
+      <Stack.Screen name='Payment' component={Payment} />
+      <Stack.Screen name='Cart' component={Cart} />
     </Stack.Navigator>
   )
 }

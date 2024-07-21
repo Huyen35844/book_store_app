@@ -1,6 +1,6 @@
 import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import SearchBar from '../ui/SearchBar'
+import SearchBar from '../component/SearchBar'
 import SliderImage from '../component/SliderImage'
 import HomeTitle from '../ui/HomeTitle'
 import ProductList from '../component/ProductList'
@@ -31,11 +31,11 @@ const Home = () => {
 
   return (
     <>
-      <SearchBar />
+      <SearchBar onPressCart={() => { navigate("Cart") }} />
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
         <SliderImage data={images} />
         <HomeTitle title={"Latest books"} />
-        <ProductList data={products}/>
+        <ProductList data={products} />
       </ScrollView>
     </>
   )
