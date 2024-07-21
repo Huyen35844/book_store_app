@@ -99,7 +99,7 @@ const EditProfile = () => {
             <View style={styles.container}>
                 <AppHeader backButton={<BackButton />} centerTitle={"EDIT PROFILE"} right={<Text></Text>} />
                 <View>
-                    <AvatarView uri={avatar} onChangeText={handleChange("avatar")} size={100} style={{ alignSelf: "center", marginTop: 30 }} />
+                    <AvatarView uri={avatar} onChangeText={handleChange("avatar")} size={120} style={{ alignSelf: "center", marginTop: 30 }} />
                     <Pressable onPress={handleOnImageSelection}>
                         <Image style={styles.editIcon} source={require('../../assets/icons/icon_edit_pen.png')} />
                     </Pressable>

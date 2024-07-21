@@ -22,7 +22,7 @@ export default AppHeader
 const styles = StyleSheet.create({
     title: {
         color: "black",
-        fontSize: 25,
+        fontSize: 23,
         fontWeight: "500"
     },
     container: {

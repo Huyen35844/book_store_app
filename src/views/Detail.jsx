@@ -8,17 +8,24 @@ import BackButton from '../ui/BackButton'
 import SliderImage from '../component/SliderImage'
 import color from '../utils/color'
 import FormButton from '../ui/FormButton'
+import useClient from '../hooks/useClient'
+import useAuth from '../hooks/useAuth'
+import { useDispatch } from 'react-redux'
+import { updateCart } from '../store/auth'
+import CartView from '../ui/CartView'
 
 const Detail = (props) => {
     const id = props.route.params?.id
     const [product, setProduct] = useState()
     const [amount, setAmount] = useState(1)
+    const { authClient } = useClient()
+    const { authState } = useAuth()
+    const dispatch = useDispatch()
 
     const fetchDetail = async () => {
         const res = await runAxiosAsync(
             client.get(`/product/detail-by-id/${id}`)
         )
-        if (!res.status) return showMessage({ message: res.data, type: "danger" })
         setProduct(res.data)
     }
 
@@ -45,12 +52,19 @@ const Detail = (props) => {
         }
     }, [product, amount]);
 
-    console.log(product?.quantity);
-
+    const handleAddToCart = async () => {
+        const res = await runAxiosAsync(
+            authClient.post("/cart/add",
+                { owner: authState.profile.id, productId: product.id, amount })
+        )
+        if (!res.status) return showMessage({ message: res.data.message, type: "danger" })
+        showMessage({ message: res.data.message, type: "success" })
+        dispatch(updateCart(!authState.cart))
+    }
     return (
         <View style={styles.container}>
             <View style={styles.headerContainer}>
-                <AppHeader backButton={<BackButton />} centerTitle={"CHI TIẾT"} right={<Text></Text>} />
+                <AppHeader backButton={<BackButton />} centerTitle={"CHI TIẾT"} right={<CartView />} />
             </View>
 
             <ScrollView>
@@ -79,7 +93,7 @@ const Detail = (props) => {
                     <Text style={styles.space}></Text>
                     <Text style={styles.total}>$ {total}</Text>
                 </View>
-                <FormButton active title={"ADD TO CART"} />
+                <FormButton active title={"ADD TO CART"} onPress={() => handleAddToCart()} />
             </View>
         </View>
     )

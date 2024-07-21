@@ -5,6 +5,7 @@ import Home from '../views/Home';
 import Category from '../views/Category';
 import Cart from '../views/Cart';
 import Profile from '../views/Profile';
+import Favorite from '../views/Favorite';
 
 
 const Tab = createBottomTabNavigator()
@@ -21,8 +22,8 @@ const tabBarIcon = (route, focused) => {
             return focused ? IconTab(require('../../assets/icons/icon_home_selected.png')) : IconTab(require('../../assets/icons/icon_home.png'));
         case "Category":
             return focused ? IconTab(require('../../assets/icons/icon_category_selected.png')) : IconTab(require('../../assets/icons/icon_category.png'));
-        case "Cart":
-            return focused ? IconTab(require('../../assets/icons/icon_cart_selected.png')) : IconTab(require('../../assets/icons/icon_cart.png'));
+        case "Favorite":
+            return focused ? IconTab(require('../../assets/icons/icon_heart_selected.png')) : IconTab(require('../../assets/icons/icon_heart.png'));
         case "Profile":
             return focused ? IconTab(require('../../assets/icons/icon_person_selected.png')) : IconTab(require('../../assets/icons/icon_person.png'));
         default:
@@ -44,7 +45,7 @@ const TabNavigator = () => {
         <Tab.Navigator screenOptions={screenOptions}>
             <Tab.Screen name='Home' component={Home} />
             <Tab.Screen name='Category' component={Category} />
-            <Tab.Screen name='Cart' component={Cart} />
+            <Tab.Screen name='Favorite' component={Favorite} />
             <Tab.Screen name='Profile' component={Profile} />
         </Tab.Navigator>
     )
