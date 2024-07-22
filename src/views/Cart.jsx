@@ -18,9 +18,26 @@ const Cart = () => {
   const [total, setTotal] = useState()
   const { navigate } = useNavigation()
 
-  const handleBuyNow = () => {
+  const handleBuyNow = async () => {
     const isSelected = carts.filter((c) => c.selected)
+    const productsInvoice = isSelected.map((i) => ({ productId: i.productId, amount: i.amount }))
+
     if (isSelected.length > 0) {
+      const res = await runAxiosAsync(
+        authClient.post("/invoice/add", {
+          owner: authState.profile.id,
+          products: productsInvoice,
+          total
+        })
+      )
+      //After successful payment, remove these products from the cart table
+      if (res.status) {
+        for (let i = 0; i < isSelected.length; i++) {
+          await runAxiosAsync(
+            authClient.post("/cart/delete", { id: isSelected[i].id })
+          )
+        }
+      }
       navigate("Payment")
     } else {
       showMessage({ message: "You haven't choose the book yet!", type: "danger" })
@@ -90,10 +107,12 @@ const Cart = () => {
     setCarts(data);
   };
 
+  //Update cart is added from Detail screen
   useEffect(() => {
     fetchCart()
   }, [authState.cart])
 
+  //Total purpose
   useEffect(() => {
     caculateTotal()
   }, [carts])

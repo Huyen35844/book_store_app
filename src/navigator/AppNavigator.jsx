@@ -7,6 +7,7 @@ import EditProfile from '../views/EditProfile'
 import Detail from '../views/Detail'
 import Payment from '../views/Payment'
 import Cart from '../views/Cart'
+import History from '../views/History'
 
 const AppNavigator = () => {
   const Stack = createNativeStackNavigator()
@@ -18,6 +19,7 @@ const AppNavigator = () => {
       <Stack.Screen name='Detail' component={Detail} />
       <Stack.Screen name='Payment' component={Payment} />
       <Stack.Screen name='Cart' component={Cart} />
+      <Stack.Screen name='History' component={History} />
     </Stack.Navigator>
   )
 }
