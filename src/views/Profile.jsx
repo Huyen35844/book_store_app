@@ -74,7 +74,6 @@ const Profile = () => {
       <TitleProfile title={"Security and Terms"} />
       <ItemProfile name={"Terms and Conditions"} />
       <ItemProfile name={"Privacy Policy"} />
-      <ItemProfile name={"Transaction History"} />
       <ItemProfile name={"Log Out"} onPress={() => signOut()} />
     </ScrollView>
   )
