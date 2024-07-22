@@ -69,7 +69,7 @@ const Profile = () => {
       <TitleProfile title={"Security and Terms"} />
       <ItemProfile name={"Edit Information"} onPress={() => navigate("EditProfile")} />
       <ItemProfile name={"Reading Tips"} />
-      <ItemProfile name={"Transaction History"} />
+      <ItemProfile name={"Transaction History"} onPress={() => navigate("History")} />
       <ItemProfile name={"Q & A"} />
       <TitleProfile title={"Security and Terms"} />
       <ItemProfile name={"Terms and Conditions"} />
