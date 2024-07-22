@@ -7,6 +7,8 @@ import color from '../utils/color'
 import ProductList from '../component/ProductList'
 import { runAxiosAsync } from '../api/runAxiosAsync'
 import client from '../api/client'
+import CartView from '../ui/CartView'
+import BackButton from '../ui/BackButton'
 
 const Category = () => {
   const [selectedItem, setSelectedItem] = useState(categories[0])
@@ -31,7 +33,7 @@ const Category = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <AppHeader centerTitle={"CATETORY"} right={<Text></Text>} />
+        <AppHeader centerTitle={"CATETORY"} right={<CartView />} />
         <FlatList showsHorizontalScrollIndicator={false} horizontal data={categories} renderItem={renderItem} />
       </View>
       <ProductList data={products} />

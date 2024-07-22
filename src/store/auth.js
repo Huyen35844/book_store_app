@@ -7,7 +7,8 @@ import { createSelector, createSlice } from "@reduxjs/toolkit";
 const initialState = {
     pending: false,
     profile: null,
-    cart: false
+    cart: false,
+    favorite: false,
 }
 
 const authSlice = createSlice({
@@ -20,11 +21,14 @@ const authSlice = createSlice({
         },
         updateCart(authState, { payload }) {
             authState.cart = payload
+        },
+        updateFavorite(authState, { payload }) {
+            authState.favorite = payload
         }
     }
 })
 
-export const { updateAuthState, updateCart } = authSlice.actions
+export const { updateAuthState, updateCart, updateFavorite } = authSlice.actions
 
 export const getAuthState = createSelector(
     //take the entire Redux state

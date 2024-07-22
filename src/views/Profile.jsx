@@ -1,5 +1,5 @@
 import { Pressable, RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AppHeader from '../component/AppHeader'
 import AvatarView from '../ui/AvatarView'
 import TitleProfile from '../ui/TitleProfile'
@@ -29,7 +29,6 @@ const Profile = () => {
       authClient.get("/auth/profile")
     )
     setRefreshing(false)
-    console.log(res.data);
     if (!res) {
       dispatch(updateAuthState({ profile: authState.profile, pending: false }))
     } else {
@@ -66,14 +65,13 @@ const Profile = () => {
           <Text style={styles.email}>{authState.profile.email}</Text>
         </View>
       </View>
-      <TitleProfile title={"Security and Terms"} />
+      <TitleProfile title={"Common"} />
       <ItemProfile name={"Edit Information"} onPress={() => navigate("EditProfile")} />
-      <ItemProfile name={"Reading Tips"} />
       <ItemProfile name={"Transaction History"} onPress={() => navigate("History")} />
-      <ItemProfile name={"Q & A"} />
+      <ItemProfile name={"Q & A"} onPress={() => navigate("QAndA")}/>
       <TitleProfile title={"Security and Terms"} />
-      <ItemProfile name={"Terms and Conditions"} />
-      <ItemProfile name={"Privacy Policy"} />
+      <ItemProfile name={"Terms and Conditions"} onPress={() => navigate("TermsAndConditions")} />
+      <ItemProfile name={"Security Policy"} onPress={() => navigate("SecurityPolicy")} />
       <ItemProfile name={"Log Out"} onPress={() => signOut()} />
     </ScrollView>
   )

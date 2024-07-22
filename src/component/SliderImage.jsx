@@ -1,4 +1,4 @@
-import { Dimensions, FlatList, Image, StyleSheet, View } from 'react-native'
+import { Dimensions, FlatList, Image, Pressable, StyleSheet, View } from 'react-native'
 import React, { useState } from 'react'
 import size from '../utils/size'
 import color from '../utils/color'
@@ -7,7 +7,7 @@ const { width } = Dimensions.get('screen')
 const imageWidth = width
 const aspect = 16 / 9
 
-const SliderImage = ({ data }) => {
+const SliderImage = ({ data, addFavorite }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const onViewableItemsChanged = ({ viewableItems }) => {
@@ -43,6 +43,9 @@ const SliderImage = ({ data }) => {
                     />
                 ))}
             </View>
+            {/* <Pressable style={styles.heartIconContainer}> */}
+            {addFavorite}
+            {/* </Pressable> */}
         </View>
     )
 }

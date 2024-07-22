@@ -43,7 +43,7 @@ const Navigator = () => {
                 dispatch(updateAuthState({ profile: { ...res.data, accessToken: token }, pending: false }))
             } else {
                 console.log(res.data);
-                showMessage({ message: res.data, type: 'danger' })
+                // showMessage({ message: res.data, type: 'danger' })
                 dispatch(updateAuthState({ profile: null, pending: false }))
             }
         }
