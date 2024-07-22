@@ -36,8 +36,7 @@ const styles = StyleSheet.create({
     itemContainer: {
         flex: 1,
         margin: 5,
-        justifyContent: 'center',
-        alignItems: 'center'
+        flexWrap: 'wrap'
     },
     list: {
         padding: size.padding
@@ -48,16 +47,21 @@ const styles = StyleSheet.create({
         height: width / aspect
     },
     columnWrapper: {
-        justifyContent: 'space-between'
+        justifyContent: "flex-start"
     },
     name: {
         fontSize: 18,
+        height: 30,
         fontWeight: 'bold',
+        textAlign: "center",
         color: color.primary,
-        marginTop: 10
+        maxWidth: 180,
+        marginTop: 5
     },
     price: {
+        marginTop: -5,
         fontSize: 20,
+        textAlign: "center",
         fontWeight: "700",
         color: 'red'
     }
