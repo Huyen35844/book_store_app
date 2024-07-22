@@ -42,7 +42,7 @@ const SignUp = () => {
     else {
       setBusy(false)
       setError('')
-      showMessage({ message: res.data.message, type: "success" })
+      showMessage({ message: res.data, type: "success" })
       navigate("SignIn")
     }
 

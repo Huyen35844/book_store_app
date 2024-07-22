@@ -11,13 +11,14 @@ import FormButton from '../ui/FormButton'
 import useClient from '../hooks/useClient'
 import useAuth from '../hooks/useAuth'
 import { useDispatch } from 'react-redux'
-import { updateCart } from '../store/auth'
+import { updateCart, updateFavorite } from '../store/auth'
 import CartView from '../ui/CartView'
 
 const Detail = (props) => {
     const id = props.route.params?.id
     const [product, setProduct] = useState()
     const [amount, setAmount] = useState(1)
+    const [isFavorite, setIsFavorite] = useState(false)
     const { authClient } = useClient()
     const { authState } = useAuth()
     const dispatch = useDispatch()
@@ -31,6 +32,7 @@ const Detail = (props) => {
 
     useEffect(() => {
         fetchDetail();
+        isInFavorite()
     }, []);
 
 
@@ -53,14 +55,49 @@ const Detail = (props) => {
     }, [product, amount]);
 
     const handleAddToCart = async () => {
+        //Checkverification email
+        if (!authState.profile.verified) return showMessage({ message: "Please verify your email in Profile first!", type: "danger" })
+
         const res = await runAxiosAsync(
             authClient.post("/cart/add",
                 { owner: authState.profile.id, productId: product.id, amount })
         )
-        if (!res.status) return showMessage({ message: res.data.message, type: "danger" })
-        showMessage({ message: res.data.message, type: "success" })
+        console.log(res);
+        if (!res.status) return showMessage({ message: res.data, type: "danger" })
+        showMessage({ message: res.data, type: "success" })
         dispatch(updateCart(!authState.cart))
     }
+
+    const isInFavorite = async () => {
+        const res = await runAxiosAsync(
+            authClient.post("/favorite/isInFavorite", { owner: authState.profile.id, productId: id }))
+        setIsFavorite(res.data.result)
+    }
+
+    const handleClickFavorite = async () => {
+        //Checkverification email
+        if (!authState.profile.verified) return showMessage({ message: "Please verify your email in Profile first!", type: "danger" })
+        if (isFavorite) {
+            await runAxiosAsync(
+                authClient.get(`/favorite/delete/${id}`, { owner: authState.profile.id, productId: id })
+            )
+        } else {
+            await runAxiosAsync(
+                authClient.post("/favorite/add", { owner: authState.profile.id, productId: id })
+            )
+        }
+        dispatch(updateFavorite(!authState.favorite))
+        setIsFavorite(!isFavorite)
+    }
+
+    const handleFavorite = () => (
+        <Pressable style={styles.heartIconContainer} onPress={() => handleClickFavorite()}>
+            {isFavorite ?
+                <Image style={styles.heartIcon} source={require("../../assets/icons/icon_heart_favorite.png")} /> :
+                <Image style={styles.heartIcon} source={require("../../assets/icons/icon_heart_not_favorite.png")} />}
+        </Pressable>
+    )
+
     return (
         <View style={styles.container}>
             <View style={styles.headerContainer}>
@@ -68,7 +105,7 @@ const Detail = (props) => {
             </View>
 
             <ScrollView>
-                <SliderImage data={product?.images} />
+                <SliderImage data={product?.images} addFavorite={handleFavorite()} />
                 <View style={styles.infoContainer}>
                     <Text style={styles.name}>{product?.name}</Text>
                     <Text style={styles.category}>{product?.category}</Text>
@@ -102,6 +139,18 @@ const Detail = (props) => {
 export default Detail
 
 const styles = StyleSheet.create({
+    heartIcon: {
+        width: 30,
+        height: 30
+    },
+    heartIconContainer: {
+        position: "absolute",
+        right: 15,
+        bottom: 20,
+        borderRadius: 30,
+        backgroundColor: "white",
+        padding: 5
+    },
     selectedContainer: {
         flexDirection: "row",
         justifyContent: "space-between",

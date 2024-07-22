@@ -1,4 +1,3 @@
-import { StyleSheet, Text, View } from 'react-native'
 import React, { useEffect } from 'react'
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native'
 import AuthNavigator from './AuthNavigator'
@@ -6,11 +5,9 @@ import AppNavigator from './AppNavigator'
 import useAuth from '../hooks/useAuth'
 import LoadingSpinner from '../ui/LoadingSpinner'
 import { useDispatch } from 'react-redux'
-import client from '../api/client'
 import asyncStorage, { Keys } from '../utils/asycnStorage'
 import { runAxiosAsync } from '../api/runAxiosAsync'
 import { updateAuthState } from '../store/auth'
-import { showMessage } from 'react-native-flash-message'
 import useClient from '../hooks/useClient'
 
 const Navigator = () => {
@@ -42,8 +39,6 @@ const Navigator = () => {
             if (res.status) {
                 dispatch(updateAuthState({ profile: { ...res.data, accessToken: token }, pending: false }))
             } else {
-                console.log(res.data);
-                showMessage({ message: res.data, type: 'danger' })
                 dispatch(updateAuthState({ profile: null, pending: false }))
             }
         }

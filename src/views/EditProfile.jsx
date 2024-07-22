@@ -25,10 +25,11 @@ const EditProfile = () => {
     const [userInfo, setUserInfo] = useState({
         email: authState.profile.email,
         name: authState.profile.name,
-        phoneNumber: authState.profile.phoneNumber,
-        address: authState.profile.address,
+        phoneNumber: authState.profile.phoneNumber || "",
+        address: authState.profile.address || "",
         avatar: authState.profile.avatar
     })
+    console.log(authState.profile);
 
     const handleChange = (name) => (text) => {
         setUserInfo({ ...userInfo, [name]: text })
@@ -57,9 +58,9 @@ const EditProfile = () => {
 
 
     const handleSubmit = async () => {
-        const { error } = validate(updateProfileSchema)
+        const { error, values } = validate(updateProfileSchema, userInfo)
+        console.log(userInfo, error, values);
         if (error) return showMessage({ message: error, type: "danger" })
-
 
         const formData = new FormData();
         formData.append('name', name);
@@ -94,6 +95,7 @@ const EditProfile = () => {
 
     }
     const { email, name, phoneNumber, address, avatar } = userInfo
+
     return (
         <CustomKeyboardAvoidingView >
             <View style={styles.container}>

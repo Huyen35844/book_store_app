@@ -10,7 +10,7 @@ const aspect = 12 / 5;
 const ProductList = ({ data }) => {
     const { navigate } = useNavigation()
     const renderItem = ({ item }) => (
-        <Pressable onPress={() => navigate("Detail", { id: item.id })} style={styles.itemContainer}>
+        <Pressable onPress={() => navigate("Detail", item.productId ? { id: item.productId } : { id: item.id })} style={styles.itemContainer}>
             <Image style={styles.image} source={{ uri: item.images[0] }} />
             <Text style={styles.name} numberOfLines={1}>{item.name}</Text>
             <Text style={styles.price}>$ {item.price}</Text>
