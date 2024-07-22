@@ -42,9 +42,13 @@ const Profile = () => {
       authClient.post("/auth/generate-verification-link")
     )
     setBusy(false)
-    if (!res.status) showMessage({ message: res.data.message, type: "danger" })
-    else showMessage({ message: res.data.message, type: "success" })
+    if (!res.status) showMessage({ message: res.data, type: "danger" })
+    else showMessage({ message: res.data, type: "success" })
   }
+
+  useEffect(() => {
+    fetchProfile()
+  }, [])
 
   return (
     <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={fetchProfile} />} style={styles.container}>
@@ -68,7 +72,7 @@ const Profile = () => {
       <TitleProfile title={"Common"} />
       <ItemProfile name={"Edit Information"} onPress={() => navigate("EditProfile")} />
       <ItemProfile name={"Transaction History"} onPress={() => navigate("History")} />
-      <ItemProfile name={"Q & A"} onPress={() => navigate("QAndA")}/>
+      <ItemProfile name={"Q & A"} onPress={() => navigate("QAndA")} />
       <TitleProfile title={"Security and Terms"} />
       <ItemProfile name={"Terms and Conditions"} onPress={() => navigate("TermsAndConditions")} />
       <ItemProfile name={"Security Policy"} onPress={() => navigate("SecurityPolicy")} />

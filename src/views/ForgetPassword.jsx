@@ -27,7 +27,7 @@ const ForgetPassword = () => {
       setError("")
       setEmail("")
       navigate("SignIn")
-      showMessage({ message: res.data.message, type: "success" })
+      showMessage({ message: res.data, type: "success" })
     }
   }
 

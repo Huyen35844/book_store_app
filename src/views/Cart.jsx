@@ -67,7 +67,7 @@ const Cart = () => {
     const res = await runAxiosAsync(
       authClient.post("/cart/delete", { id: item.id })
     )
-    if (res.status) showMessage({ message: res.data.message, type: "success" })
+    if (res.status) showMessage({ message: res.data, type: "success" })
     fetchCart()
   }
 

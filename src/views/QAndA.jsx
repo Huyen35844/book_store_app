@@ -13,19 +13,19 @@ const QAndA = () => {
       <ScrollView style={{ marginTop: 15 }} showsVerticalScrollIndicator={false}>
         <View style={styles.qaItem}>
           <ReadingTitle title="What is the purpose of this app?" />
-          <ReadingContent content="The app is designed to help users manage and track their reading activities, including finding books, tracking progress, and more." />
+          <ReadingContent content="The app is designed to help users buy the book with the most appealing price, easy to find book by searching the name and add the book in your favorite list, add to cart list." />
         </View>
         <View style={styles.qaItem}>
-          <ReadingTitle title="How do I add a new book to my reading list?" />
-          <ReadingContent content="You can add a new book by navigating to the 'Add Book' section, filling out the details, and saving it to your list." />
+          <ReadingTitle title="How do I add a book to my favorite list?" />
+          <ReadingContent content="You can add a new book by navigating to the detailed screen of the book, press the hearted icon on the right side." />
         </View>
         <View style={styles.qaItem}>
-          <ReadingTitle title="Can I track my reading progress?" />
-          <ReadingContent content="Yes, the app allows you to track your reading progress, set goals, and view your reading history." />
+          <ReadingTitle title="Can I review my invoice?" />
+          <ReadingContent content="Yes, the app allows you to review your invoice by navigate to Profile screen. Then press transaction history, there is a list of invoices. You can know more the info by pressing to the item." />
         </View>
         <View style={styles.qaItem}>
           <ReadingTitle title="How do I contact support?" />
-          <ReadingContent content="You can contact support through the 'Contact Us' section in the app, where you can submit your queries or issues." />
+          <ReadingContent content="You can contact support through this email 'thuhuyen35844@gmail.com', where you can submit your queries or issues." />
         </View>
         <View style={styles.qaItem}>
           <ReadingTitle title="Is my data secure?" />

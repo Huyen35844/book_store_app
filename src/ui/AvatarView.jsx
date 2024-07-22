@@ -9,13 +9,7 @@ const AvatarView = ({ uri, size = 70, style }) => {
     const iconSize = size * iconSizeFactor;
     return (
         <View style={[{ width: size, height: size, borderRadius: size / 2 }, styles.container, !uri && styles.profileIcon, style]}>
-            {uri ? (
-                <Image source={{ uri }} style={[styles.flex1, { width: size, height: size }]} />
-            ) : (
-                <View style={[{ width: iconContainerSize, height: iconContainerSize, borderRadius: iconContainerSize / 2 }, styles.iconContainer]}>
-                    <Image style={{ width: iconSize, height: iconSize }} source={require('../../assets/icons/icon_profile_account.png')} />
-                </View>
-            )}
+            <Image source={{ uri }} style={[styles.flex1, { width: size, height: size }]} />
         </View>
     );
 };
