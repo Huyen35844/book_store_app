@@ -8,7 +8,6 @@ import ProductList from '../component/ProductList'
 import { runAxiosAsync } from '../api/runAxiosAsync'
 import client from '../api/client'
 import CartView from '../ui/CartView'
-import BackButton from '../ui/BackButton'
 
 const Category = () => {
   const [selectedItem, setSelectedItem] = useState(categories[0])

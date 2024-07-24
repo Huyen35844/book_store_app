@@ -95,16 +95,15 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 18,
-        color: 'white',
+        color: 'black',
         fontWeight: '500',
     },
     item: {
         marginBottom: 15,
         borderRadius: 10,
-        borderWidth: 3,
-        backgroundColor: '#3CB371',
+        borderWidth: 2,
         padding: 10,
-        borderColor: color.primary,
+        borderColor: "black",
     },
     container: {
         padding: size.padding,

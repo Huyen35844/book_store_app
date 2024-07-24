@@ -1,4 +1,4 @@
-import { FlatList, Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { FlatList, Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import AppHeader from '../component/AppHeader'
 import BackButton from '../ui/BackButton'
@@ -30,6 +30,7 @@ const Cart = () => {
           total
         })
       )
+
       //After successful payment, remove these products from the cart table
       if (res.status) {
         for (let i = 0; i < isSelected.length; i++) {
@@ -149,7 +150,6 @@ const Cart = () => {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        {/* <AppHeader backButton={<BackButton />} centerTitle={'CART'} right={<Image style={styles.deleteIcon} source={require('../../assets/icons/icon_delete.png')} />} /> */}
         <AppHeader backButton={<BackButton />} centerTitle={'CART'} right={<Text></Text>} />
       </View>
 
