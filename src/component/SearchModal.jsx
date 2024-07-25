@@ -9,6 +9,7 @@ const SearchModal = ({ closeModal, visiable }) => {
     const [value, setValue] = useState(null)
     const [data, setData] = useState([])
     const { navigate } = useNavigation()
+    
     const handleSearch = async () => {
         const res = await runAxiosAsync(
             client.get(`/product/search?name=${value}`)

@@ -12,8 +12,8 @@ const History = () => {
     const { authClient } = useClient();
     const { authState } = useAuth();
     const [history, setHistory] = useState([]);
-    const [selectedInvoice, setSelectedInvoice] = useState(null); // State to manage selected invoice
-    const [modalVisible, setModalVisible] = useState(false); // State to control modal visibility
+    const [selectedInvoice, setSelectedInvoice] = useState(null); 
+    const [modalVisible, setModalVisible] = useState(false);
 
     const fetchHistory = async () => {
         const res = await runAxiosAsync(
@@ -62,7 +62,7 @@ const History = () => {
                             <Text style={styles.modalBoldText}>Invoice ID: {selectedInvoice.id}</Text>
                             <Text style={styles.modalBoldText}>Date: {new Date(selectedInvoice.date).toLocaleDateString()}</Text>
 
-                            <ScrollView>
+                            <ScrollView style={{ flex: 1 }}>
                                 {selectedInvoice.products.map((product, index) => (
                                     <View style={styles.product} key={index}>
                                         <Text style={styles.modalText}>Name: {product.name}</Text>
@@ -116,6 +116,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
     modalContent: {
+        height: 600,
         width: '80%',
         padding: 20,
         backgroundColor: 'white',

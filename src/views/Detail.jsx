@@ -55,14 +55,14 @@ const Detail = (props) => {
     }, [product, amount]);
 
     const handleAddToCart = async () => {
-        //Checkverification email
+        //Check verification email
         if (!authState.profile.verified) return showMessage({ message: "Please verify your email in Profile first!", type: "danger" })
 
         const res = await runAxiosAsync(
             authClient.post("/cart/add",
                 { owner: authState.profile.id, productId: product.id, amount })
         )
-        console.log(res);
+
         if (!res.status) return showMessage({ message: res.data, type: "danger" })
         showMessage({ message: res.data, type: "success" })
         dispatch(updateCart(!authState.cart))
@@ -75,7 +75,7 @@ const Detail = (props) => {
     }
 
     const handleClickFavorite = async () => {
-        //Checkverification email
+        //Check verification email
         if (!authState.profile.verified) return showMessage({ message: "Please verify your email in Profile first!", type: "danger" })
         if (isFavorite) {
             await runAxiosAsync(
@@ -213,6 +213,7 @@ const styles = StyleSheet.create({
         fontWeight: "700"
     },
     name: {
+        maxWidth: 280,
         color: "black",
         fontSize: 23,
         fontWeight: "700"

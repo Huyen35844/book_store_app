@@ -25,6 +25,7 @@ const Profile = () => {
   const fetchProfile = async () => {
     dispatch(updateAuthState({ profile: authState.profile, pending: true }))
     setRefreshing(true)
+    
     const res = await runAxiosAsync(
       authClient.get("/auth/profile")
     )

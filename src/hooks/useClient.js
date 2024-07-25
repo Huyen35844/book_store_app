@@ -9,7 +9,6 @@ import { getAuthState, updateAuthState } from "../store/auth"
 const authClient = axios.create({ baseURL: baseURL })
 
 const useClient = () => {
-    //Need refresh token to send request 
     const authState = useSelector(getAuthState)
     const dispatch = useDispatch()
 

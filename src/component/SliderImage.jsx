@@ -1,23 +1,18 @@
 import { Dimensions, FlatList, Image, Pressable, StyleSheet, View } from 'react-native'
 import React, { useState } from 'react'
-import size from '../utils/size'
 import color from '../utils/color'
 
 const { width } = Dimensions.get('screen')
 const imageWidth = width
-const aspect = 16 / 9
 
 const SliderImage = ({ data, addFavorite }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
+    //Pick up the index of the viewableItem
     const onViewableItemsChanged = ({ viewableItems }) => {
         if (viewableItems.length > 0) {
             setCurrentIndex(viewableItems[0].index);
         }
-    };
-
-    const viewabilityConfig = {
-        viewAreaCoveragePercentThreshold: 50
     };
 
     return (
@@ -30,7 +25,8 @@ const SliderImage = ({ data, addFavorite }) => {
                 pagingEnabled
                 showsHorizontalScrollIndicator={false}
                 onViewableItemsChanged={onViewableItemsChanged}
-                viewabilityConfig={viewabilityConfig}
+                //a viewable item is supposed to be seen when we can see the item at least 50%
+                viewabilityConfig={{ viewAreaCoveragePercentThreshold: 50 }}
             />
             <View style={styles.dotContainer}>
                 {data?.map((_, index) => (
@@ -43,9 +39,7 @@ const SliderImage = ({ data, addFavorite }) => {
                     />
                 ))}
             </View>
-            {/* <Pressable style={styles.heartIconContainer}> */}
             {addFavorite}
-            {/* </Pressable> */}
         </View>
     )
 }
@@ -68,6 +62,6 @@ const styles = StyleSheet.create({
     image: {
         resizeMode: 'cover',
         width: imageWidth,
-        height: imageWidth / aspect,
+        height: imageWidth / (16 / 9),
     }
 })

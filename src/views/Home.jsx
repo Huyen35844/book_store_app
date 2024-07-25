@@ -10,31 +10,25 @@ import SearchModal from '../component/SearchModal'
 import color from '../utils/color'
 
 const Home = () => {
-  const images = [
-    "https://down-vn.img.susercontent.com/file/vn-11134208-7qukw-lhmulmkmjagx60",
-    "https://www.shutterstock.com/image-vector/book-exchange-landing-page-template-600nw-2127230852.jpg",
-    "https://img.freepik.com/free-psd/online-book-store-banner-template_23-2149043261.jpg"
-  ]
-
   const [products, setProducts] = useState([])
   const [visibleModal, setVisibleModal] = useState(false)
   const { navigate } = useNavigation()
 
   const fetchProductList = async () => {
     const res = await runAxiosAsync(
-      client.get("/product/get-latest-list?limit=4&page=1")
+      client.get("/product/get-latest-list?limit=10&page=1")
     )
     setProducts(res.data.products)
   }
+  
   useEffect(() => {
     fetchProductList();
   }, []);
-  console.log(visibleModal);
 
   return (
     <>
       <View style={styles.headerContainer}>
-        <Pressable style={styles.input} onPress={() => { setVisibleModal(true)}}>
+        <Pressable style={styles.input} onPress={() => { setVisibleModal(true) }}>
           <Text style={styles.text}>Search your book</Text>
         </Pressable>
         <Image style={styles.iconSearch} source={require("../../assets/icons/icon_search.png")} />
@@ -46,7 +40,7 @@ const Home = () => {
       {visibleModal && <SearchModal visiable={visibleModal} closeModal={() => setVisibleModal(false)} />}
 
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
-        <SliderImage data={images} />
+        <SliderImage data={sliderHome} />
         <HomeTitle title={"Latest books"} />
         <ProductList data={products} />
       </ScrollView>
@@ -55,6 +49,12 @@ const Home = () => {
 }
 
 export default Home
+
+const sliderHome = [
+  "https://down-vn.img.susercontent.com/file/vn-11134208-7qukw-lhmulmkmjagx60",
+  "https://www.shutterstock.com/image-vector/book-exchange-landing-page-template-600nw-2127230852.jpg",
+  "https://img.freepik.com/free-psd/online-book-store-banner-template_23-2149043261.jpg"
+]
 
 const styles = StyleSheet.create({
   text: {

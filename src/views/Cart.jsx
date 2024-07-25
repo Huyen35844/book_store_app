@@ -55,7 +55,7 @@ const Cart = () => {
     setTotal(total)
   }
 
-  const handlePressCheck = (item) => {
+  const handlePressCheckBox = (item) => {
     const updatedCarts = carts.map(cartItem =>
       cartItem.id === item.id
         ? { ...cartItem, selected: !cartItem.selected }
@@ -120,7 +120,7 @@ const Cart = () => {
 
   const renderItem = ({ item }) => (
     <View style={styles.item}>
-      <Pressable onPress={() => handlePressCheck(item)}>
+      <Pressable onPress={() => handlePressCheckBox(item)}>
         {item.selected ?
           <Image source={require("../../assets/icons/icon_checked.png")} /> :
           <Image source={require("../../assets/icons/icon_uncheck.png")} />
@@ -153,7 +153,7 @@ const Cart = () => {
         <AppHeader backButton={<BackButton />} centerTitle={'CART'} right={<Text></Text>} />
       </View>
 
-      <FlatList data={carts} renderItem={renderItem} />
+      <FlatList showsVerticalScrollIndicator={false} data={carts} renderItem={renderItem} />
 
       <View style={styles.footerContainer}>
         <View style={styles.infoPay}>

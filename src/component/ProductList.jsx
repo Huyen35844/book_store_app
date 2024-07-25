@@ -5,11 +5,12 @@ import color from '../utils/color';
 import { useNavigation } from '@react-navigation/native';
 
 const { width } = Dimensions.get('screen');
-const aspect = 12 / 5;
 
-const ProductList = ({ data }) => {
+const ProductList = ({ data, scrollEnabled }) => {
     const { navigate } = useNavigation()
     const renderItem = ({ item }) => (
+        //item.id only works for product table, in case of the favorite table, item.id is id of favorite
+        //use item.productId in the favorite table instead
         <Pressable onPress={() => navigate("Detail", item.productId ? { id: item.productId } : { id: item.id })} style={styles.itemContainer}>
             <Image style={styles.image} source={{ uri: item.images[0] }} />
             <Text style={styles.name} numberOfLines={1}>{item.name}</Text>
@@ -24,7 +25,7 @@ const ProductList = ({ data }) => {
             renderItem={renderItem}
             keyExtractor={(item) => item.id}
             numColumns={2}
-            scrollEnabled={false}
+            scrollEnabled={scrollEnabled}
             columnWrapperStyle={styles.columnWrapper}
         />
     );
@@ -36,7 +37,8 @@ const styles = StyleSheet.create({
     itemContainer: {
         flex: 1,
         margin: 5,
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        paddingBottom: 10
     },
     list: {
         padding: size.padding
@@ -44,7 +46,7 @@ const styles = StyleSheet.create({
     image: {
         borderRadius: 10,
         width: width / 2.3,
-        height: width / aspect
+        height: width / (12 / 5)
     },
     columnWrapper: {
         justifyContent: "flex-start"

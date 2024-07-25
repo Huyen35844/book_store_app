@@ -1,7 +1,5 @@
-import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import Home from '../views/Home'
 import TabNavigator from './TabNavigator'
 import EditProfile from '../views/EditProfile'
 import Detail from '../views/Detail'
@@ -13,11 +11,13 @@ import TermsAndConditions from '../views/TermsAndConditions'
 import QAndA from '../views/QAndA'
 
 const AppNavigator = () => {
+
   const Stack = createNativeStackNavigator()
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name='TabNavigator' component={TabNavigator} />
+      {/* Screens display without bottomTab */}
       <Stack.Screen name='EditProfile' component={EditProfile} />
       <Stack.Screen name='Detail' component={Detail} />
       <Stack.Screen name='Payment' component={Payment} />
@@ -31,5 +31,3 @@ const AppNavigator = () => {
 }
 
 export default AppNavigator
-
-const styles = StyleSheet.create({})

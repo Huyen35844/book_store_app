@@ -1,9 +1,8 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image} from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Home from '../views/Home';
 import Category from '../views/Category';
-import Cart from '../views/Cart';
 import Profile from '../views/Profile';
 import Favorite from '../views/Favorite';
 
@@ -52,5 +51,3 @@ const TabNavigator = () => {
 }
 
 export default TabNavigator
-
-const styles = StyleSheet.create({})

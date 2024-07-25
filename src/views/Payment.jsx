@@ -3,12 +3,11 @@ import React from 'react'
 
 const Payment = (props) => {
     const navigation = props.navigation;
+    
     const goToHome = () => {
         navigation.navigate('Home')
     }
-    const goToManual = () => {
-        navigation.navigate('Manual')
-    }
+
     return (
         <ImageBackground style={styles.container} source={require('../../assets/images/paymentBackground.jpg')}>
             <Text style={styles.text}>Congratulations</Text>

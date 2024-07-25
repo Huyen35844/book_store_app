@@ -1,4 +1,4 @@
-import { Button, Dimensions, Image, KeyboardAvoidingView, Pressable, StyleSheet, Text, View } from 'react-native'
+import { Dimensions, Image,  Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import AppHeader from '../component/AppHeader'
 import BackButton from '../ui/BackButton'
@@ -7,9 +7,8 @@ import AvatarView from '../ui/AvatarView'
 import FormInput from '../ui/FormInput'
 import FormButton from '../ui/FormButton'
 import useAuth from '../hooks/useAuth'
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import { launchImageLibrary } from 'react-native-image-picker';
 import { runAxiosAsync } from '../api/runAxiosAsync'
-import client from '../api/client'
 import useClient from '../hooks/useClient'
 import { useDispatch } from 'react-redux'
 import { updateAuthState } from '../store/auth'
@@ -29,13 +28,10 @@ const EditProfile = () => {
         address: authState.profile.address || "",
         avatar: authState.profile.avatar
     })
-    console.log(authState.profile);
 
     const handleChange = (name) => (text) => {
         setUserInfo({ ...userInfo, [name]: text })
     }
-
-
 
     const handleOnImageSelection = async () => {
         const options = {
@@ -58,8 +54,7 @@ const EditProfile = () => {
 
 
     const handleSubmit = async () => {
-        const { error, values } = validate(updateProfileSchema, userInfo)
-        console.log(userInfo, error, values);
+        const { error } = await validate(updateProfileSchema, userInfo)
         if (error) return showMessage({ message: error, type: "danger" })
 
         const formData = new FormData();
@@ -73,6 +68,7 @@ const EditProfile = () => {
             type: 'image/jpeg',
             name: 'avatar.jpg',
         });
+
 
         dispatch(updateAuthState({ profile: authState.profile, pending: true }))
         setBusy(true)
