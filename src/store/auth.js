@@ -7,6 +7,7 @@ import { createSelector, createSlice } from "@reduxjs/toolkit";
 const initialState = {
     pending: false,
     profile: null,
+    //cart, favorite is boolean because I only want to check if it changed to fetch new data, not store data here
     cart: false,
     favorite: false,
 }
@@ -16,6 +17,7 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         updateAuthState(authState, { payload }) {
+            //pending is used for on and off the animation loading from lottie file
             authState.pending = payload.pending
             authState.profile = payload.profile
         },

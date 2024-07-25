@@ -8,17 +8,11 @@ import ProductList from '../component/ProductList'
 import { runAxiosAsync } from '../api/runAxiosAsync'
 import client from '../api/client'
 import CartView from '../ui/CartView'
-import BackButton from '../ui/BackButton'
 
 const Category = () => {
   const [selectedItem, setSelectedItem] = useState(categories[0])
   const [products, setProducts] = useState([])
 
-  const renderItem = ({ item }) => (
-    <Pressable style={styles.item} onPress={() => setSelectedItem(item)}>
-      <Text style={[styles.itemText, selectedItem == item ? styles.selectedItem : null]}>{item}</Text>
-    </Pressable>
-  )
   const fetchProduct = async () => {
     const res = await runAxiosAsync(
       client.get(`/product/get-product-by-category/${selectedItem}`)
@@ -30,13 +24,19 @@ const Category = () => {
     fetchProduct()
   }, [selectedItem])
 
+  const renderItem = ({ item }) => (
+    <Pressable style={styles.item} onPress={() => setSelectedItem(item)}>
+      <Text style={[styles.itemText, selectedItem == item ? styles.selectedItem : null]}>{item}</Text>
+    </Pressable>
+  )
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <AppHeader centerTitle={"CATETORY"} right={<CartView />} />
         <FlatList showsHorizontalScrollIndicator={false} horizontal data={categories} renderItem={renderItem} />
       </View>
-      <ProductList data={products} />
+      <ProductList scrollEnabled={true} data={products} />
     </View>
   )
 }
@@ -61,5 +61,8 @@ const styles = StyleSheet.create({
   },
   header: {
     padding: size.padding
+  },
+  container: {
+    flex: 1,
   }
 })

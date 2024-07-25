@@ -1,4 +1,4 @@
-import { FlatList, Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { FlatList, Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import AppHeader from '../component/AppHeader'
 import BackButton from '../ui/BackButton'
@@ -30,6 +30,7 @@ const Cart = () => {
           total
         })
       )
+
       //After successful payment, remove these products from the cart table
       if (res.status) {
         for (let i = 0; i < isSelected.length; i++) {
@@ -54,7 +55,7 @@ const Cart = () => {
     setTotal(total)
   }
 
-  const handlePressCheck = (item) => {
+  const handlePressCheckBox = (item) => {
     const updatedCarts = carts.map(cartItem =>
       cartItem.id === item.id
         ? { ...cartItem, selected: !cartItem.selected }
@@ -119,7 +120,7 @@ const Cart = () => {
 
   const renderItem = ({ item }) => (
     <View style={styles.item}>
-      <Pressable onPress={() => handlePressCheck(item)}>
+      <Pressable onPress={() => handlePressCheckBox(item)}>
         {item.selected ?
           <Image source={require("../../assets/icons/icon_checked.png")} /> :
           <Image source={require("../../assets/icons/icon_uncheck.png")} />
@@ -149,11 +150,10 @@ const Cart = () => {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        {/* <AppHeader backButton={<BackButton />} centerTitle={'CART'} right={<Image style={styles.deleteIcon} source={require('../../assets/icons/icon_delete.png')} />} /> */}
         <AppHeader backButton={<BackButton />} centerTitle={'CART'} right={<Text></Text>} />
       </View>
 
-      <FlatList data={carts} renderItem={renderItem} />
+      <FlatList showsVerticalScrollIndicator={false} data={carts} renderItem={renderItem} />
 
       <View style={styles.footerContainer}>
         <View style={styles.infoPay}>

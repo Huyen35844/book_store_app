@@ -3,7 +3,7 @@ import React from 'react'
 
 
 const LayoutAuth = ({ children }) => {
-  //At first, I set height: "35%" and it causes the error with keyboardAvodingView
+  //At first, I set height: "35%" and it causes the error with keyboardAvodingView because when we scroll, the height is not accurate
   const { height: screenHeight } = Dimensions.get('window');
   return (
     <View style={styles.container}>

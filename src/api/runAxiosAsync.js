@@ -1,5 +1,9 @@
-import axios, { AxiosError } from "axios"
+import { AxiosError } from "axios"
 
+/**
+ * Purpose: avoid repeating try catch block over and over again
+ * Return:  "data" is the result sent by server, "status": false || true (failed || successful)
+ */
 export const runAxiosAsync = async (promise) => {
     try {
         const response = await promise
@@ -9,7 +13,7 @@ export const runAxiosAsync = async (promise) => {
         if (error instanceof AxiosError) {
             const response = error.response
             if (response) {
-                message = response.data.message
+                message = response.data
             }
         }
 

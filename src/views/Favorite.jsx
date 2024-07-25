@@ -32,7 +32,7 @@ const Favorite = () => {
       <View style={styles.header}>
         <AppHeader centerTitle={"FAVORITE"} right={<CartView />} />
       </View>
-      <ProductList data={products} />
+      <ProductList scrollEnabled={true} data={products} />
     </View>
   )
 }

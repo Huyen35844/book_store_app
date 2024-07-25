@@ -29,8 +29,6 @@ const useAuth = () => {
         else {
             await asyncStorage.save(Keys.ACCESS_TOKEN, res.data.tokens.access)
             await asyncStorage.save(Keys.REFRESH_TOKEN, res.data.tokens.refresh)
-            // await AsyncStorage.setItem("access-token", res.data.tokens.access)
-            // await AsyncStorage.setItem("refresh-token", res.data.tokens.refresh)
             dispatch(updateAuthState({ profile: { ...res.data.profile, accessToken: res.data.tokens.access }, pending: false }))
             return { data: res.data, status: res.status }
         }

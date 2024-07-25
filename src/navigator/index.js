@@ -23,10 +23,10 @@ const Navigator = () => {
     const { loggedIn, authState } = useAuth()
     const { authClient } = useClient()
 
-    //Why don't we store loggedIn in asyncStorage because it causes the delay and show signIn screen
+    //Have just opened the app, run this function to get user's info and store it in profile state.
+    //Base one profile state, decide the direction to navigate, app or auth navigator
     const fetchAuthState = async () => {
         const token = await asyncStorage.get(Keys.ACCESS_TOKEN)
-        // const token = await AsyncStorage.getItem("access-token")
         if (token) {
             dispatch(updateAuthState({ profile: null, pending: true }))
             const res = await runAxiosAsync(
@@ -50,6 +50,8 @@ const Navigator = () => {
 
     return (
         <NavigationContainer theme={MyTheme}>
+            {/* while is loading api, display the modal has animation loading from lottie file
+            it depends on pending state  */}
             <LoadingSpinner visiable={authState.pending} />
             {!loggedIn ? <AuthNavigator /> : <AppNavigator />}
         </NavigationContainer>

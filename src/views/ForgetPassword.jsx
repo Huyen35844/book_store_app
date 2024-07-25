@@ -21,7 +21,7 @@ const ForgetPassword = () => {
     const res = await runAxiosAsync(
       client.post("/auth/forget-password", { email })
     )
-    console.log(res);
+    
     if (!res.status) return setError(res.data)
     else {
       setError("")
