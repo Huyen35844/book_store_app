@@ -7,9 +7,9 @@ export const validate = async (schema, value) => {
         return { values: data }
     } catch (error) {
         if (error instanceof yup.ValidationError) {
-            //set abortEarly as true, yup catches the error not in order
-            //set abortEarly as false, yup catches all the error at once (5 errors occurs)
-            //set inner[0] to only get the first error yup catch to solve this problem
+            //set abortEarly as true, yup catches the error not in order but one by one
+            //set abortEarly as false, yup catches all the errors at once (5 errors occur)
+            //set abortEarly as false and error.inner[0] to only get the first error and in order
             return { error: error.inner[0].message }
         } else {
             return { error: error.message }
